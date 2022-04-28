@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import _uniqueId from 'lodash/uniqueId';
 import { Button } from '@material-ui/core';
 import DialogPost from '../components/UI/Dialog/DialogPost';
@@ -163,7 +163,7 @@ function TestTwo() {
       return tempPosts;
     });
   };
-  
+
   const rowRenderer = ({ index, key, style }) => {
     const { title, body, id, isliked, media, comments } = posts[index] || {};
 

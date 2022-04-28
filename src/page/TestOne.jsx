@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import _uniqueId from 'lodash/uniqueId';
 import { Button } from '@material-ui/core';
 import DialogPost from '../components/UI/Dialog/DialogPost';
@@ -24,7 +24,7 @@ function TestOne() {
   const [comments, setComments] = useState([]);
   const [id] = useState(_uniqueId('prefix-'));
   const [addNewPost, setAddNewPost] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  // const [hasMore, setHasMore] = useState(true);
 
   const fetchPostsTempHandler = useCallback(async () => {
     // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -176,7 +176,7 @@ function TestOne() {
           <InfiniteScroll
             dataLength={posts.length}
             next={fetchMoreData}
-            hasMore={hasMore}
+            // hasMore={hasMore}
             loader={<h4>Loading...</h4>}
             endMessage={
               <section>

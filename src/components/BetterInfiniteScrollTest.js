@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import throttle from 'lodash/throttle';
+import React, { useEffect, useRef } from 'react';
+// import throttle from 'lodash/throttle';
 import { AutoSizer } from 'react-virtualized';
 import { VariableSizeList as List } from 'react-window';
 
@@ -12,12 +12,12 @@ const BetterInfiniteScrollTest = ({
   getRowHeight,
   listRef,
 }) => {
-  const [showLoader, setShowLoader] = useState(false);
+  // const [showLoader, setShowLoader] = useState(false);
   let triggered = useRef(false);
 
   useEffect(() => {
     triggered.current = false;
-    setShowLoader(false);
+    // setShowLoader(false);
   }, [dataLength]);
 
   const props = useRef({
@@ -26,26 +26,26 @@ const BetterInfiniteScrollTest = ({
     onScroll,
   });
 
-  const scrollListener = (e) => {
-    const { next, hasMore, onScroll } = props.current;
-    if (typeof onScroll === 'function') {
-      setTimeout(() => onScroll && onScroll(e), 0);
-    }
+  // const scrollListener = (e) => {
+  //   const { next, hasMore, onScroll } = props.current;
+  //   if (typeof onScroll === 'function') {
+  //     setTimeout(() => onScroll && onScroll(e), 0);
+  //   }
 
-    const { clientHeight, scrollHeight, scrollTop } = e;
+  //   const { clientHeight, scrollHeight, scrollTop } = e;
 
-    if (triggered.current) {
-      return;
-    }
+  //   if (triggered.current) {
+  //     return;
+  //   }
 
-    const atBottom = scrollTop + clientHeight >= (scrollHeight * 9) / 10;
+  //   const atBottom = scrollTop + clientHeight >= (scrollHeight * 9) / 10;
 
-    if (atBottom && hasMore) {
-      triggered.current = true;
-      setShowLoader(true);
-      next && next();
-    }
-  };
+  //   if (atBottom && hasMore) {
+  //     triggered.current = true;
+  //     setShowLoader(true);
+  //     next && next();
+  //   }
+  // };
 
   useEffect(() => {
     props.current = {
@@ -55,9 +55,9 @@ const BetterInfiniteScrollTest = ({
     };
   }, [next, hasMore, onScroll]);
 
-  const throttleScrollListener = throttle(scrollListener, 150);
+  // const throttleScrollListener = throttle(scrollListener, 150);
 
-  const isLoaderVisible = showLoader && hasMore;
+  // const isLoaderVisible = showLoader && hasMore;
 
   return (
     <AutoSizer
