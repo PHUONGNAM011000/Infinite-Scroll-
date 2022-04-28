@@ -1,0 +1,70 @@
+.post {
+  margin: 1rem auto;
+  padding: 2rem;
+  background-color: #8c65bb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  width: 670px;
+}
+
+.post h2 {
+  font-size: 2rem;
+  color: #f7e702;
+}
+
+.post h3 {
+  color: #eccf77;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.post p {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.post hr {
+  margin: 1rem 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.content h2 {
+  text-align: left;
+}
+
+.post img {
+  width: -webkit-fill-available;
+  height: 500px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.post svg {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+.seeMore {
+  text-align: left;
+  margin-top: 8px;
+}
+
+.seeMore span {
+  cursor: pointer;
+}
+
+.seeMore span:hover {
+  text-decoration: underline;
+}
