@@ -7,11 +7,11 @@ import TestThree from './page/TestThree';
 const App = () => {
   return (
     <Router>
-      <Route path="/test1">
-        <TestOne />
+      <Route path="/">
+        <TestTwo />
       </Route>
       <Route path="/test2">
-        <TestTwo />
+        <TestOne />
       </Route>
       <Route path="/test3">
         <TestThree />
