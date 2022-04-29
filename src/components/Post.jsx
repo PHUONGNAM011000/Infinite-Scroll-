@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classes from './Post.module.css';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { FcComments } from 'react-icons/fc';
