@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
 import _uniqueId from 'lodash/uniqueId';
-import { Button } from '@material-ui/core';
 import DialogPost from '../components/UI/Dialog/DialogPost';
 import Post from '../components/Post';
 import BetterInfiniteScroll from '../components/BetterInfiniteScroll';
@@ -26,21 +25,9 @@ function TestTwo() {
   const [addNewPost, setAddNewPost] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [postDialog, setPostDialog] = useState({});
+  const [count, setCount] = useState(5);
 
   const fetchPostsHandler = useCallback(async () => {
-    // const response = await fetch(
-    //   'https://jsonplaceholder.typicode.com/posts?_page=1&_limit=5'
-    // );
-
-    // const data = await response.json();
-    // const addLiked = data.map((item) => {
-    //   return {
-    //     ...item,
-    //     isLiked: false,
-    //     media: `https://picsum.photos/id/${item.id}/200/300`,
-    //   };
-    // });
-
     let addLiked = [];
     for (let i = 0; i < 5; i++) {
       addLiked.push({
@@ -56,19 +43,8 @@ function TestTwo() {
   }, []);
 
   const fetchPostsTempHandler = useCallback(async () => {
-    // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-
-    // const data = await response.json();
-    // const addLiked = data.map((item) => {
-    //   return {
-    //     ...item,
-    //     isLiked: false,
-    //     media: `https://picsum.photos/id/${item.id}/200/300`,
-    //   };
-    // });
-
     let addLiked = [];
-    for (let i = 5; i < 10000; i++) {
+    for (let i = 0; i < 10000; i++) {
       addLiked.push({
         id: i + 1,
         body: lorem.generateSentences(5),
@@ -104,8 +80,8 @@ function TestTwo() {
       );
   }, [comments]);
 
-  const callPost = async () => {
-    let addPosts = postsTemp.slice(posts.length, posts.length + 5);
+  const callPost = () => {
+    let addPosts = postsTemp.slice(posts.length, posts.length + +count);
 
     let all = new Set([...posts, ...addPosts]);
     setPosts([...all]);
@@ -199,36 +175,37 @@ function TestTwo() {
           onAddPost={addPostHandler}
         />
       )}
-      <Button
-        fullWidth={true}
+      {/* <Button
         color="primary"
         variant="contained"
         onClick={() => setAddNewPost(true)}
       >
         Thêm bài viết
-      </Button>
-
-      <BetterInfiniteScroll
-        dataLength={posts.length}
-        hasMore={hasMore}
-        next={callPost}
-        loader={
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: 'white',
-            }}
-          >
-            loading...
-          </div>
-        }
-        height={750}
-        elementHeight={1250} // 새로 추가
-        rowRenderer={rowRenderer}
-        children={posts}
-      />
+      </Button> */}
+      <div>
+        <BetterInfiniteScroll
+          dataLength={posts.length}
+          hasMore={hasMore}
+          next={callPost}
+          loader={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+              }}
+            >
+              loading...
+            </div>
+          }
+          height={785}
+          elementHeight={1250} // 새로 추가
+          rowRenderer={rowRenderer}
+          children={posts}
+          setCount={setCount}
+        />
+      </div>
     </React.Fragment>
   );
 }

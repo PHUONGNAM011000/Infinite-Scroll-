@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import throttle from 'lodash/throttle';
 import { List, AutoSizer } from 'react-virtualized';
+import LoadFeed from './UI/LoadFeed/LoadFeed';
 
 const BetterInfiniteScroll = ({
   next,
@@ -12,9 +13,12 @@ const BetterInfiniteScroll = ({
   children,
   elementHeight,
   rowRenderer,
+  setCount,
 }) => {
   const [showLoader, setShowLoader] = useState(false);
   let triggered = useRef(false);
+  const [show, setShow] = useState(false);
+  const [counter, setCounter] = useState(5);
 
   useEffect(() => {
     triggered.current = false;
@@ -60,35 +64,54 @@ const BetterInfiniteScroll = ({
 
   const isLoaderVisible = showLoader && hasMore;
 
+  const counterChangedHandler = () => {
+    setCount(counter);
+    setShow(true);
+  };
+
   return (
     <div
       style={{
         position: 'relative',
+        display: 'flex',
+        alignItems: 'start',
+        justifyContent: 'center',
+        maxWidth: '888px',
       }}
     >
-      <AutoSizer disableHeight>
-        {({ width }) => (
-          <List
-            rowCount={children.length}
-            width={width}
-            height={height}
-            rowHeight={elementHeight}
-            rowRenderer={rowRenderer}
-            overscanRowCount={5}
-            onScroll={throttleScrollListener}
-          />
-        )}
-      </AutoSizer>
-      <div
-        style={{
-          visibility: isLoaderVisible ? 'visible' : 'hidden',
-          position: isLoaderVisible ? '' : 'absolute',
-          bottom: 0,
-          willChange: 'scroll-position',
-        }}
-      >
-        {loader}
-      </div>
+      <LoadFeed
+        onClick={counterChangedHandler}
+        counter={counter}
+        setCounter={setCounter}
+      />
+
+      {show && (
+        <>
+          <AutoSizer disableHeight>
+            {({ width }) => (
+              <List
+                rowCount={children.length}
+                width={width}
+                height={height}
+                rowHeight={elementHeight}
+                rowRenderer={rowRenderer}
+                overscanRowCount={5}
+                onScroll={throttleScrollListener}
+              />
+            )}
+          </AutoSizer>
+          <div
+            style={{
+              visibility: isLoaderVisible ? 'visible' : 'hidden',
+              position: isLoaderVisible ? '' : 'absolute',
+              bottom: 0,
+              willChange: 'scroll-position',
+            }}
+          >
+            {loader}
+          </div>
+        </>
+      )}
     </div>
   );
 };
