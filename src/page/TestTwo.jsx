@@ -224,8 +224,8 @@ function TestTwo() {
             loading...
           </div>
         }
-        height={661}
-        elementHeight={950} // 새로 추가
+        height={750}
+        elementHeight={1250} // 새로 추가
         rowRenderer={rowRenderer}
         children={posts}
       />

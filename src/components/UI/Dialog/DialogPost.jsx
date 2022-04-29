@@ -124,7 +124,10 @@ export default function DialogPost(props) {
           <TextField
             error={errorContent}
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => {
+              setErrorContent(false);
+              setContent(e.target.value);
+            }}
             label="Nội dung"
             type="text"
             variant="outlined"
@@ -135,7 +138,10 @@ export default function DialogPost(props) {
           <TextField
             error={errorMedia}
             value={media}
-            onChange={(e) => setMedia(e.target.value)}
+            onChange={(e) => {
+              setErrorMedia(false);
+              setMedia(e.target.value);
+            }}
             label="Link Ảnh hoặc video"
             type="text"
             variant="outlined"

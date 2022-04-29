@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Post.module.css';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { FcComments } from 'react-icons/fc';
@@ -64,7 +64,9 @@ const Post = (props) => {
           <FcComments onClick={showClickHandler} />
         </div>
 
-        <div>
+        <div
+          style={{ maxHeight: '330px', overflow: 'auto', marginTop: '16px' }}
+        >
           {props.comments !== undefined &&
             loadCmt &&
             props.comments.map((comment) => (
