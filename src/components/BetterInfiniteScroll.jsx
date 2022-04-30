@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import throttle from 'lodash/throttle';
 import { List, AutoSizer } from 'react-virtualized';
-import LoadFeed from './UI/LoadFeed/LoadFeed';
 
 const BetterInfiniteScroll = ({
   next,
