@@ -189,6 +189,7 @@ function TestTwo() {
           justifyContent: 'space-between',
           boxShadow: 'rgb(44 101 144 / 10%) 0px 0px 8px 0px',
           backgroundColor: '#8c65bb',
+          padding: '0 16px',
         }}
       >
         <LoadFeed
@@ -222,7 +223,7 @@ function TestTwo() {
           </div>
         }
         height={window.innerHeight - 72}
-        elementHeight={1230} // 새로 추가
+        elementHeight={1250} // 새로 추가
         rowRenderer={rowRenderer}
         children={posts}
         setCount={setCount}

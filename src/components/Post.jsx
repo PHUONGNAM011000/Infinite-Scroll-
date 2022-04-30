@@ -2,10 +2,10 @@ import React from 'react';
 import classes from './Post.module.css';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { FcComments } from 'react-icons/fc';
-import Comment from './Comment';
 import CommentDefault from './CommentDefault';
 import { useState } from 'react';
 import LongMenu from './UI/Menu/LongMenu';
+import ListComment from './ListComment';
 
 const Post = (props) => {
   const [loadCmt, setLoadCmt] = useState(false);
@@ -62,35 +62,11 @@ const Post = (props) => {
         )}
         <FcComments onClick={showClickHandler} />
       </div>
-
-      <div style={{ maxHeight: '330px', overflow: 'auto', marginTop: '16px' }}>
-        <Comment
-          comment={{
-            media: 'https://picsum.photos/id/10/200/300',
-            name: 'Tam',
-            body: 'Do excepteur in laboris. Dolore tempor anim esse amet. ',
-          }}
-        />
-        <Comment
-          comment={{
-            media: 'https://picsum.photos/id/20/200/300',
-            name: 'Nam',
-            body: 'Ea enim tempor proident aliquip consectetur labore et amet reprehenderit sit elit. ',
-          }}
-        />
-        <Comment
-          comment={{
-            media: 'https://picsum.photos/id/30/200/300',
-            name: 'Linh',
-            body: 'Cillum reprehenderit qui do nisi tempor amet aliquip occaecat voluptate mollit labore dolor enim sint aliqua.',
-          }}
-        />
-        {props.comments !== undefined &&
-          loadCmt &&
-          props.comments.map((comment) => (
-            <Comment comment={comment} key={comment.id} />
-          ))}
-      </div>
+      <ListComment
+        comments={props.comments}
+        loadCmt={loadCmt}
+        addCmt={addCmt}
+      />
 
       {!loadCmt && (
         <div className={classes.seeMore}>
