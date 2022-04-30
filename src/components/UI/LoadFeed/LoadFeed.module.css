@@ -1,11 +1,12 @@
 .loadFeed {
-  background-color: #8c65bb;
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: auto;
   border-radius: 16px;
-  padding: 16px;
+  padding: 8px;
   margin-right: 16px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .loadFeed input {
@@ -16,4 +17,6 @@
   margin-bottom: 8px;
   width: 100px;
   padding: 8px 0;
+  height: 40px;
+  margin-right: 8px;
 }

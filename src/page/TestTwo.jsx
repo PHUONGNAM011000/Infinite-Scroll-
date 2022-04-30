@@ -5,6 +5,8 @@ import DialogPost from '../components/UI/Dialog/DialogPost';
 import Post from '../components/Post';
 import BetterInfiniteScroll from '../components/BetterInfiniteScroll';
 import { LoremIpsum } from 'lorem-ipsum';
+import { Button } from '@material-ui/core';
+import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -26,6 +28,7 @@ function TestTwo() {
   const [hasMore, setHasMore] = useState(true);
   const [postDialog, setPostDialog] = useState({});
   const [count, setCount] = useState(5);
+  const [counter, setCounter] = useState(5);
 
   const fetchPostsHandler = useCallback(async () => {
     let addLiked = [];
@@ -140,6 +143,10 @@ function TestTwo() {
     });
   };
 
+  const counterChangeHandler = () => {
+    setCount(counter);
+  };
+
   const rowRenderer = ({ index, key, style }) => {
     const { title, body, id, isliked, media, comments } = posts[index] || {};
 
@@ -175,37 +182,51 @@ function TestTwo() {
           onAddPost={addPostHandler}
         />
       )}
-      {/* <Button
-        color="primary"
-        variant="contained"
-        onClick={() => setAddNewPost(true)}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          boxShadow: 'rgb(44 101 144 / 10%) 0px 0px 8px 0px',
+          backgroundColor: '#8c65bb',
+        }}
       >
-        Thêm bài viết
-      </Button> */}
-      <div>
-        <BetterInfiniteScroll
-          dataLength={posts.length}
-          hasMore={hasMore}
-          next={callPost}
-          loader={
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: 'white',
-              }}
-            >
-              loading...
-            </div>
-          }
-          height={785}
-          elementHeight={1250} // 새로 추가
-          rowRenderer={rowRenderer}
-          children={posts}
-          setCount={setCount}
+        <LoadFeed
+          counter={counter}
+          setCounter={setCounter}
+          onClick={counterChangeHandler}
         />
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => setAddNewPost(true)}
+        >
+          Thêm bài viết
+        </Button>
       </div>
+
+      <BetterInfiniteScroll
+        dataLength={posts.length}
+        hasMore={hasMore}
+        next={callPost}
+        loader={
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: 'white',
+            }}
+          >
+            loading...
+          </div>
+        }
+        height={window.innerHeight - 72}
+        elementHeight={1230} // 새로 추가
+        rowRenderer={rowRenderer}
+        children={posts}
+        setCount={setCount}
+      />
     </React.Fragment>
   );
 }
