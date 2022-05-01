@@ -12,11 +12,13 @@ const CommentDefault = (props) => {
       </div>
       <div className={classes.input}>
         <input
+          ref={props.input1Ref}
           type="text"
           placeholder="Viết bình luận..."
           value={props.addCmt}
           onChange={props.onChange}
           onKeyPress={props.onAdd}
+          onFocus={true}
         />
       </div>
     </div>

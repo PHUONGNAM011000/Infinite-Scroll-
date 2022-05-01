@@ -7,6 +7,7 @@ import { useState } from 'react';
 import LongMenu from './UI/Menu/LongMenu';
 import ListComment from './ListComment';
 import { v4 as uuidv4 } from 'uuid';
+import UseFocus from '../hooks/use-focus';
 
 const Post = (props) => {
   const [cmtNow, setCmtNow] = useState([]);
@@ -14,6 +15,7 @@ const Post = (props) => {
   const [addCmt, setAddCmt] = useState('');
   const [liked, setLiked] = useState(props.isliked);
   const idRamdom = Math.floor(Math.random() * 20) + 1;
+  const [input1Ref, setInput1Focus] = UseFocus();
 
   const showClickHandler = () => {
     setLoadCmt(true);
@@ -72,7 +74,7 @@ const Post = (props) => {
         ) : (
           <AiOutlineLike onClick={unLikedHandler} />
         )}
-        <FcComments />
+        <FcComments onClick={() => setInput1Focus()} />
       </div>
       <ListComment
         comments={props.comments}
@@ -87,6 +89,7 @@ const Post = (props) => {
       )}
 
       <CommentDefault
+        input1Ref={input1Ref}
         addCmt={addCmt}
         onAdd={addCmtHandler}
         onChange={changeCmtHandler}

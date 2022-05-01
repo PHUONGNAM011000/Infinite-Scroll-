@@ -59,6 +59,7 @@ export default function DialogPost(props) {
   const [media, setMedia] = useState(props.postDialog.media || '');
   const [errorContent, setErrorContent] = useState(false);
   const [errorMedia, setErrorMedia] = useState(false);
+  const [errorEmptyMedia, setErrorEmptyMedia] = useState(false);
 
   const handleClose = () => {
     props.setAddNewPost(false);
@@ -68,9 +69,13 @@ export default function DialogPost(props) {
   };
 
   const handleSave = () => {
-    if (content === '' && media === '') {
+    if (
+      content === '' &&
+      (media === '' || media.match(/(https?:\/\/)/i) == null)
+    ) {
       setErrorContent(true);
       setErrorMedia(true);
+      setErrorEmptyMedia(true);
       return;
     }
 
@@ -81,6 +86,9 @@ export default function DialogPost(props) {
 
     if (media === '') {
       setErrorMedia(true);
+      return;
+    } else if (media.match(/(https?:\/\/)/i) == null) {
+      setErrorEmptyMedia(true);
       return;
     }
 
@@ -136,17 +144,21 @@ export default function DialogPost(props) {
             helperText={errorContent && 'Bạn chưa nhập nội dung bài viết.'}
           />
           <TextField
-            error={errorMedia}
+            error={errorMedia || errorEmptyMedia}
             value={media}
             onChange={(e) => {
               setErrorMedia(false);
+              setErrorEmptyMedia(false);
               setMedia(e.target.value);
             }}
             label="Link Ảnh hoặc video"
             type="text"
             variant="outlined"
             fullWidth={true}
-            helperText={errorMedia && 'Bạn nhập link Ảnh chưa đúng định dạng.'}
+            helperText={
+              (errorMedia && 'Bạn chưa nhập link Ảnh.') ||
+              (errorEmptyMedia && 'Bạn nhập link Ảnh chưa đúng định dạng.')
+            }
           />
         </DialogContent>
         <DialogActions>
