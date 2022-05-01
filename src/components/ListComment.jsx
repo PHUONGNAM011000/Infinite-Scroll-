@@ -33,6 +33,13 @@ const ListComment = (props) => {
           body: 'Cillum reprehenderit qui do nisi tempor amet aliquip occaecat voluptate mollit labore dolor enim sint aliqua.',
         }}
       />
+
+      {props.cmtNow.length !== 0 &&
+        !props.loadCmt &&
+        props.cmtNow.map((comment) => (
+          <Comment comment={comment} key={comment.id} />
+        ))}
+
       {props.comments !== undefined &&
         props.loadCmt &&
         props.comments.map((comment) => (

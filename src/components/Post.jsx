@@ -6,8 +6,10 @@ import CommentDefault from './CommentDefault';
 import { useState } from 'react';
 import LongMenu from './UI/Menu/LongMenu';
 import ListComment from './ListComment';
+import { v4 as uuidv4 } from 'uuid';
 
 const Post = (props) => {
+  const [cmtNow, setCmtNow] = useState([]);
   const [loadCmt, setLoadCmt] = useState(false);
   const [addCmt, setAddCmt] = useState('');
   const [liked, setLiked] = useState(props.isliked);
@@ -19,12 +21,22 @@ const Post = (props) => {
   };
 
   const addCmtHandler = (e) => {
-    if (e.key === 'Enter') {
-      props.addCommentHandler({
-        body: e.target.value,
-        postId: props.comments[0].postId,
-        media: `https://picsum.photos/id/${idRamdom}/200/300`,
-      });
+    const newCmt = {
+      id: uuidv4(),
+      name: 'Phuong Nam',
+      body: addCmt,
+      postId: props.id,
+      media: `https://picsum.photos/id/${idRamdom}/200/300`,
+    };
+
+    if (e.key === 'Enter' && addCmt.length !== 0 && !loadCmt) {
+      setCmtNow([...cmtNow, newCmt]);
+      props.addCommentHandler(newCmt, loadCmt);
+      setAddCmt('');
+    }
+
+    if (e.key === 'Enter' && addCmt.length !== 0 && loadCmt) {
+      props.addCommentHandler(newCmt, loadCmt);
       setAddCmt('');
     }
   };
@@ -60,12 +72,12 @@ const Post = (props) => {
         ) : (
           <AiOutlineLike onClick={unLikedHandler} />
         )}
-        <FcComments onClick={showClickHandler} />
+        <FcComments />
       </div>
       <ListComment
         comments={props.comments}
         loadCmt={loadCmt}
-        addCmt={addCmt}
+        cmtNow={cmtNow}
       />
 
       {!loadCmt && (

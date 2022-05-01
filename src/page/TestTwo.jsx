@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
-import _uniqueId from 'lodash/uniqueId';
 import DialogPost from '../components/UI/Dialog/DialogPost';
 import Post from '../components/Post';
 import BetterInfiniteScroll from '../components/BetterInfiniteScroll';
@@ -23,7 +22,7 @@ function TestTwo() {
   const [posts, setPosts] = useState([]);
   const [postsTemp, setPostsTemp] = useState([]);
   const [comments, setComments] = useState([]);
-  const [id] = useState(_uniqueId('prefix-'));
+  const [addNewComment, setAddNewComment] = useState([]);
   const [addNewPost, setAddNewPost] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [postDialog, setPostDialog] = useState({});
@@ -91,11 +90,9 @@ function TestTwo() {
   };
 
   const callMoreComment = async (pageNum) => {
-    const existCmt = comments.findIndex((item) => item.postId === pageNum);
+    const cmtNews = addNewComment.filter((item) => item.postId === pageNum);
 
-    if (existCmt !== -1) {
-      return;
-    }
+    console.log(cmtNews);
 
     let response = await axios.get(
       `https://jsonplaceholder.typicode.com/comments?_page=${pageNum}&_limit=5`
@@ -107,19 +104,18 @@ function TestTwo() {
       return { ...item, media: `https://picsum.photos/id/${idRamdom}/200/300` };
     });
 
-    let all = new Set([...comments, ...cmtTemp]);
+    let all = new Set([...cmtNews, ...comments, ...cmtTemp]);
     setComments([...all]);
   };
 
-  const addCommentHandler = (item) => {
-    setComments((prevCmt) => [
-      ...prevCmt,
-      {
-        ...item,
-        id: id,
-        name: 'Phuong Nam',
-      },
-    ]);
+  const addCommentHandler = (item, loadCmt, cmtNow) => {
+    if (loadCmt) {
+      const temp = [...comments];
+      temp.push(item);
+      setComments(temp);
+    } else {
+      setAddNewComment((prevAddNewComment) => [...prevAddNewComment, item]);
+    }
   };
 
   const changeLikedHandler = (id) => {
