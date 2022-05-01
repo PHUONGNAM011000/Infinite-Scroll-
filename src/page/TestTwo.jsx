@@ -6,6 +6,7 @@ import BetterInfiniteScroll from '../components/BetterInfiniteScroll';
 import { LoremIpsum } from 'lorem-ipsum';
 import { Button } from '@material-ui/core';
 import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
+import { useAlert } from 'react-alert';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -28,6 +29,7 @@ function TestTwo() {
   const [postDialog, setPostDialog] = useState({});
   const [count, setCount] = useState(5);
   const [counter, setCounter] = useState(5);
+  const alert = useAlert();
 
   const fetchPostsHandler = useCallback(async () => {
     let addLiked = [];
@@ -92,8 +94,6 @@ function TestTwo() {
   const callMoreComment = async (pageNum) => {
     const cmtNews = addNewComment.filter((item) => item.postId === pageNum);
 
-    console.log(cmtNews);
-
     let response = await axios.get(
       `https://jsonplaceholder.typicode.com/comments?_page=${pageNum}&_limit=5`
     );
@@ -140,7 +140,16 @@ function TestTwo() {
   };
 
   const counterChangeHandler = () => {
-    setCount(counter);
+    if (counter >= 5) {
+      setCount(counter);
+      alert.success(
+        `FETCH THÀNH CÔNG ! MỖI LẦN LOAD SẼ LOAD ${counter} BÀI VIẾT`
+      );
+    } else {
+      alert.error(
+        `FETCH KHÔNG THÀNH CÔNG ! DO SỐ LƯỢNG BÀI VIẾT BẠN NHẬP NHỎ HƠN 5`
+      );
+    }
   };
 
   const rowRenderer = ({ index, key, style }) => {

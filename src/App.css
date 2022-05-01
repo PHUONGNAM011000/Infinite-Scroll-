@@ -43,3 +43,7 @@ button:active {
   background-color: #460897;
   border-color: #460897;
 }
+
+#__react-alert__ div div div {
+  width: auto !important;
+}

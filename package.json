@@ -13,6 +13,8 @@
     "lodash": "^4.17.21",
     "lorem-ipsum": "^2.0.4",
     "react": "^18.0.0",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-id-generator": "^3.0.2",

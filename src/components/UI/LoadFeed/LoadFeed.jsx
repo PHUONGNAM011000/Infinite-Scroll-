@@ -9,6 +9,7 @@ const LoadFeed = (props) => {
         <input
           type="number"
           value={props.counter}
+          min={5}
           onChange={(e) => props.setCounter(e.target.value)}
         />
       </div>
