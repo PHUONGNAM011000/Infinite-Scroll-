@@ -7,11 +7,11 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <TestTwo />
-        </Route>
-        <Route exact path="/normal">
+        <Route path="/basic-normal">
           <TestOne />
+        </Route>
+        <Route path="/">
+          <TestTwo />
         </Route>
       </Switch>
     </Router>

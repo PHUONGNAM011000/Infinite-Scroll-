@@ -7,6 +7,7 @@ import { LoremIpsum } from 'lorem-ipsum';
 import PostListNormal from '../components/Normal-Test/PostListNormal';
 import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
+import { Link } from 'react-router-dom';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -177,13 +178,20 @@ function TestOne() {
           setCounter={setCounter}
           onClick={counterChangeHandler}
         />
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => setAddNewPost(true)}
-        >
-          Thêm bài viết
-        </Button>
+        <div>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => setAddNewPost(true)}
+          >
+            Thêm bài viết
+          </Button>
+          {/* <Button color="primary" variant="contained">
+            <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
+              Reat Window
+            </Link>
+          </Button> */}
+        </div>
       </div>
 
       {posts.length !== 0 && (

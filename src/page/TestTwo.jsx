@@ -7,6 +7,7 @@ import { LoremIpsum } from 'lorem-ipsum';
 import { Button } from '@material-ui/core';
 import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
+import { Link, useHistory } from 'react-router-dom';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -206,13 +207,24 @@ function TestTwo() {
           setCounter={setCounter}
           onClick={counterChangeHandler}
         />
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => setAddNewPost(true)}
-        >
-          Thêm bài viết
-        </Button>
+        <div>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => setAddNewPost(true)}
+            style={{ marginRight: '10px' }}
+          >
+            Thêm bài viết
+          </Button>
+          {/* <Button color="primary" variant="contained">
+            <Link
+              to="/basic-normal"
+              style={{ color: '#fff', textDecoration: 'none' }}
+            >
+              normal
+            </Link>
+          </Button> */}
+        </div>
       </div>
 
       <BetterInfiniteScroll
