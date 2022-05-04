@@ -7,7 +7,6 @@ import { LoremIpsum } from 'lorem-ipsum';
 import PostListNormal from '../components/Normal-Test/PostListNormal';
 import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
-import { Link } from 'react-router-dom';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
