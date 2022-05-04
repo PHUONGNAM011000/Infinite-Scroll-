@@ -7,10 +7,10 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/test">
+        <Route exact path="/">
           <TestTwo />
         </Route>
-        <Route path="/normal">
+        <Route exact path="/normal">
           <TestOne />
         </Route>
       </Switch>
