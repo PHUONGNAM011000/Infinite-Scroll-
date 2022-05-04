@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './CommentDefault.module.css';
+import classes from './CommentNormalDefault.module.css';
 
 const CommentDefault = (props) => {
   return (

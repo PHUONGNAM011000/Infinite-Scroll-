@@ -5,7 +5,6 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 
 const ROOT_CSS = css({
   height: 300,
-  overflow: 'scroll',
   marginTop: '16px',
 });
 

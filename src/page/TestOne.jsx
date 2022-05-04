@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
-import _uniqueId from 'lodash/uniqueId';
 import { Button } from '@material-ui/core';
 import DialogPost from '../components/UI/Dialog/DialogPost';
-import PostList from '../components/PostList';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { LoremIpsum } from 'lorem-ipsum';
+import PostListNormal from '../components/Normal-Test/PostListNormal';
+import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
+import { useAlert } from 'react-alert';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -22,30 +23,24 @@ function TestOne() {
   const [posts, setPosts] = useState([]);
   const [postsTemp, setPostsTemp] = useState([]);
   const [comments, setComments] = useState([]);
-  const [id] = useState(_uniqueId('prefix-'));
   const [addNewPost, setAddNewPost] = useState(false);
-  // const [hasMore, setHasMore] = useState(true);
+  const [addNewComment, setAddNewComment] = useState([]);
+  const [count, setCount] = useState(5);
+  const [counter, setCounter] = useState(5);
+  const [postDialog, setPostDialog] = useState({});
+  const alert = useAlert();
 
   const fetchPostsTempHandler = useCallback(async () => {
-    // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-
-    // const data = await response.json();
-    // const addLiked = data.map((item) => {
-    //   return {
-    //     ...item,
-    //     isLiked: false,
-    //     media: `https://picsum.photos/id/${item.id}/200/300`,
-    //   };
-    // });
-
     let addLiked = [];
-    for (let i = 5; i < 10000; i++) {
+    for (let i = 0; i < 10000; i++) {
       addLiked.push({
         id: i + 1,
         body: lorem.generateSentences(5),
         title: lorem.generateWords(1),
         isliked: false,
-        media: `https://picsum.photos/id/${i + 1}/200/300`,
+        media: `https://picsum.photos/id/${Math.floor(
+          Math.random() * 1000
+        )}/200/300`,
       });
     }
 
@@ -53,19 +48,6 @@ function TestOne() {
   }, []);
 
   const fetchPostsHandler = useCallback(async () => {
-    // const response = await fetch(
-    //   'https://jsonplaceholder.typicode.com/posts?_page=1&_limit=5'
-    // );
-
-    // const data = await response.json();
-    // const addLiked = data.map((item) => {
-    //   return {
-    //     ...item,
-    //     isLiked: false,
-    //     media: `https://picsum.photos/id/${item.id}/200/300`,
-    //   };
-    // });
-
     let addLiked = [];
     for (let i = 0; i < 5; i++) {
       addLiked.push({
@@ -98,20 +80,16 @@ function TestOne() {
   }, [comments]);
 
   const fetchMoreData = () => {
-    const tempPosts = [...postsTemp].slice(posts.length, posts.length + 5);
+    const tempPosts = [...postsTemp].slice(posts.length, posts.length + +count);
 
     setPosts([...posts, ...tempPosts]);
   };
 
-  const callMoreComment = async (id) => {
-    const existCmt = comments.findIndex((item) => item.postId === id);
-
-    if (existCmt !== -1) {
-      return;
-    }
+  const callMoreComment = async (pageNum) => {
+    const cmtNews = addNewComment.filter((item) => item.postId === pageNum);
 
     let response = await axios.get(
-      `https://jsonplaceholder.typicode.com/comments?_page=${id}&_limit=5`
+      `https://jsonplaceholder.typicode.com/comments?_page=${pageNum}&_limit=5`
     );
 
     let cmtTemp = response.data.map((item) => {
@@ -120,19 +98,18 @@ function TestOne() {
       return { ...item, media: `https://picsum.photos/id/${idRamdom}/200/300` };
     });
 
-    let all = new Set([...comments, ...cmtTemp]);
+    let all = new Set([...cmtNews, ...comments, ...cmtTemp]);
     setComments([...all]);
   };
 
-  const addCommentHandler = (item) => {
-    setComments((prevCmt) => [
-      ...prevCmt,
-      {
-        ...item,
-        id: id,
-        name: 'Phuong Nam',
-      },
-    ]);
+  const addCommentHandler = (item, loadCmt, cmtNow) => {
+    if (loadCmt) {
+      const temp = [...comments];
+      temp.push(item);
+      setComments(temp);
+    } else {
+      setAddNewComment((prevAddNewComment) => [...prevAddNewComment, item]);
+    }
   };
 
   const changeLikedHandler = (id) => {
@@ -156,46 +133,84 @@ function TestOne() {
     });
   };
 
+  const counterChangeHandler = () => {
+    if (counter >= 5) {
+      setCount(counter);
+      alert.success(
+        `FETCH THÀNH CÔNG ! MỖI LẦN LOAD SẼ LOAD ${counter} BÀI VIẾT`
+      );
+    } else {
+      alert.error(
+        `FETCH KHÔNG THÀNH CÔNG ! DO SỐ LƯỢNG BÀI VIẾT BẠN NHẬP NHỎ HƠN 5`
+      );
+    }
+  };
+
   return (
     <React.Fragment>
       {addNewPost && (
-        <DialogPost setAddNewPost={setAddNewPost} onAddPost={addPostHandler} />
+        <DialogPost
+          posts={posts}
+          setPosts={setPosts}
+          setAddNewPost={setAddNewPost}
+          postDialog={postDialog}
+          setPostDialog={setPostDialog}
+          onAddPost={addPostHandler}
+        />
       )}
-      <section>
+
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          boxShadow: 'rgb(44 101 144 / 10%) 0px 0px 8px 0px',
+          backgroundColor: '#8c65bb',
+          padding: '0 16px',
+          position: 'sticky',
+          top: '0',
+          zIndex: 100,
+        }}
+      >
+        <LoadFeed
+          counter={counter}
+          setCounter={setCounter}
+          onClick={counterChangeHandler}
+        />
         <Button
-          fullWidth={true}
           color="primary"
           variant="contained"
           onClick={() => setAddNewPost(true)}
         >
           Thêm bài viết
         </Button>
-      </section>
-      <section>
-        {posts.length !== 0 && (
-          <InfiniteScroll
-            dataLength={posts.length}
-            next={fetchMoreData}
-            // hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={
-              <section>
-                <p style={{ textAlign: 'center' }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              </section>
-            }
-          >
-            <PostList
-              posts={posts}
-              removePostHandler={removePostHandler}
-              getComments={callMoreComment}
-              addCommentHandler={addCommentHandler}
-              changeLikedHandler={changeLikedHandler}
-            />
-          </InfiniteScroll>
-        )}
-      </section>
+      </div>
+
+      {posts.length !== 0 && (
+        <InfiniteScroll
+          dataLength={posts.length}
+          next={fetchMoreData}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <section>
+              <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            </section>
+          }
+        >
+          <PostListNormal
+            posts={posts}
+            removePostHandler={removePostHandler}
+            getComments={callMoreComment}
+            addCommentHandler={addCommentHandler}
+            changeLikedHandler={changeLikedHandler}
+            setAddNewPost={setAddNewPost}
+            setPostDialog={setPostDialog}
+          />
+        </InfiniteScroll>
+      )}
     </React.Fragment>
   );
 }

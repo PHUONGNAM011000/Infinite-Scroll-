@@ -1,15 +1,15 @@
 import React from 'react';
-import classes from './Post.module.css';
+import classes from './PostNormal.module.css';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { FcComments } from 'react-icons/fc';
-import CommentDefault from './CommentDefault';
+import CommentNormalDefault from './CommentNormalDefault';
 import { useState } from 'react';
-import LongMenu from './UI/Menu/LongMenu';
-import ListComment from './ListComment';
 import { v4 as uuidv4 } from 'uuid';
-import UseFocus from '../hooks/use-focus';
+import ListComment from '../ListComment';
+import UseFocus from '../../hooks/use-focus';
+import LongMenu from '../UI/Menu/LongMenu';
 
-const Post = (props) => {
+const PostNormal = (props) => {
   const [cmtNow, setCmtNow] = useState([]);
   const [loadCmt, setLoadCmt] = useState(false);
   const [addCmt, setAddCmt] = useState('');
@@ -65,7 +65,7 @@ const Post = (props) => {
         <LongMenu {...props} />
       </div>
       <p>{props.body}</p>
-      <div className={classes.media}>
+      <div>
         <img src={props.media} alt="#"></img>
       </div>
       <hr></hr>
@@ -89,7 +89,7 @@ const Post = (props) => {
         </div>
       )}
 
-      <CommentDefault
+      <CommentNormalDefault
         input1Ref={input1Ref}
         addCmt={addCmt}
         onAdd={addCmtHandler}
@@ -99,4 +99,4 @@ const Post = (props) => {
   );
 };
 
-export default Post;
+export default PostNormal;

@@ -41,7 +41,7 @@
   text-align: left;
 }
 
-.post .media img {
+.post img {
   width: -webkit-fill-available;
   height: 500px;
 }

@@ -1,0 +1,53 @@
+.comment {
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  margin-right: 8px;
+}
+
+.user {
+  padding-right: 8px;
+}
+
+.user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.content-comment {
+  padding: 8px;
+  background: #fff;
+  border-radius: 8px;
+  color: #000;
+}
+
+.content-comment .name {
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.content-comment .cmt {
+  text-align: left;
+  font-weight: 300;
+}
+
+.comment-default {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.comment-default .input {
+  flex: 1;
+}
+
+.input input {
+  width: 100%;
+  height: 50px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 16px;
+  padding: 8px;
+}

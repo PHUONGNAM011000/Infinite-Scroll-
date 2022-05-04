@@ -54,7 +54,9 @@ function TestTwo() {
         body: lorem.generateSentences(5),
         title: lorem.generateWords(1),
         isliked: false,
-        media: `https://picsum.photos/id/${i + 1}/200/300`,
+        media: `https://picsum.photos/id/${Math.floor(
+          Math.random() * 1000
+        )}/200/300`,
       });
     }
 
@@ -195,6 +197,8 @@ function TestTwo() {
           boxShadow: 'rgb(44 101 144 / 10%) 0px 0px 8px 0px',
           backgroundColor: '#8c65bb',
           padding: '0 16px',
+          position: 'sticky',
+          top: '0',
         }}
       >
         <LoadFeed
