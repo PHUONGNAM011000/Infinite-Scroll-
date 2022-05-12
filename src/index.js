@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { transitions, positions, Provider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import 'video-react/dist/video-react.css';
 
 const options = {
   timeout: 3000,

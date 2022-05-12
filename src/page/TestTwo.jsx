@@ -7,6 +7,7 @@ import { LoremIpsum } from 'lorem-ipsum';
 import { Button } from '@material-ui/core';
 import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
+import { useHistory } from 'react-router-dom';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -30,34 +31,53 @@ function TestTwo() {
   const [count, setCount] = useState(5);
   const [counter, setCounter] = useState(5);
   const alert = useAlert();
+  let history = useHistory();
 
   const fetchPostsHandler = useCallback(async () => {
     let addLiked = [];
-    for (let i = 0; i < 5; i++) {
-      addLiked.push({
-        id: i + 1,
-        body: lorem.generateSentences(5),
-        title: lorem.generateWords(1),
-        isliked: false,
-        media: `https://picsum.photos/id/${i + 1}/200/300`,
-      });
+    for (let i = 0; i < +count; i++) {
+      if (i % 2 === 0) {
+        addLiked.push({
+          id: i + 1,
+          body: lorem.generateSentences(5),
+          title: lorem.generateWords(1),
+          isliked: false,
+          media: `https://picsum.photos/id/${i + 1}/200/300`,
+        });
+      } else
+        addLiked.push({
+          id: i + 1,
+          body: lorem.generateSentences(5),
+          title: lorem.generateWords(1),
+          isliked: false,
+          media: `http://media.w3.org/2010/05/bunny/movie.mp4`,
+        });
     }
 
     setPosts(addLiked);
-  }, []);
+  }, [+count]);
 
   const fetchPostsTempHandler = useCallback(async () => {
     let addLiked = [];
     for (let i = 0; i < 10000; i++) {
-      addLiked.push({
-        id: i + 1,
-        body: lorem.generateSentences(5),
-        title: lorem.generateWords(1),
-        isliked: false,
-        media: `https://picsum.photos/id/${Math.floor(
-          Math.random() * 1000
-        )}/200/300`,
-      });
+      if (i % 2 === 0) {
+        addLiked.push({
+          id: i + 1,
+          body: lorem.generateSentences(5),
+          title: lorem.generateWords(1),
+          isliked: false,
+          media: `https://picsum.photos/id/${Math.floor(
+            Math.random() * 1000
+          )}/200/300`,
+        });
+      } else
+        addLiked.push({
+          id: i + 1,
+          body: lorem.generateSentences(5),
+          title: lorem.generateWords(1),
+          isliked: false,
+          media: `http://media.w3.org/2010/05/bunny/movie.mp4`,
+        });
     }
 
     setPostsTemp(addLiked);
@@ -215,14 +235,13 @@ function TestTwo() {
           >
             Thêm bài viết
           </Button>
-          {/* <Button color="primary" variant="contained">
-            <Link
-              to="/basic-normal"
-              style={{ color: '#fff', textDecoration: 'none' }}
-            >
-              normal
-            </Link>
-          </Button> */}
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => history.push('/basic')}
+          >
+            normal
+          </Button>
         </div>
       </div>
 
@@ -243,7 +262,7 @@ function TestTwo() {
           </div>
         }
         height={window.innerHeight - 72}
-        elementHeight={1250} // 새로 추가
+        elementHeight={1150} // 새로 추가
         rowRenderer={rowRenderer}
         children={posts}
         setCount={setCount}

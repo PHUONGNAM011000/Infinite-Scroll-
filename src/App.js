@@ -1,19 +1,17 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import TestOne from './page/TestOne';
-import './App.css';
 import TestTwo from './page/TestTwo';
+import './App.css';
 
 const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/basic-normal">
-          <TestOne />
-        </Route>
-        <Route path="/">
-          <TestTwo />
-        </Route>
-      </Switch>
+      <Route path="/basic">
+        <TestOne />
+      </Route>
+      <Route exact path="/">
+        <TestTwo />
+      </Route>
     </Router>
   );
 };

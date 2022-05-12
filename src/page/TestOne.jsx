@@ -49,7 +49,7 @@ function TestOne() {
 
   const fetchPostsHandler = useCallback(async () => {
     let addLiked = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < +count; i++) {
       addLiked.push({
         id: i + 1,
         body: lorem.generateSentences(5),
@@ -60,7 +60,7 @@ function TestOne() {
     }
 
     setPosts(addLiked);
-  }, []);
+  }, [+count]);
 
   useEffect(() => {
     fetchPostsTempHandler();

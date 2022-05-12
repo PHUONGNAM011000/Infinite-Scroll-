@@ -8,6 +8,7 @@ import LongMenu from './UI/Menu/LongMenu';
 import ListComment from './ListComment';
 import { v4 as uuidv4 } from 'uuid';
 import UseFocus from '../hooks/use-focus';
+import { Player, BigPlayButton } from 'video-react';
 
 const Post = (props) => {
   const [cmtNow, setCmtNow] = useState([]);
@@ -66,7 +67,15 @@ const Post = (props) => {
       </div>
       <p>{props.body}</p>
       <div className={classes.media}>
-        <img src={props.media} alt="#"></img>
+        {(props.id - 1) % 2 === 0 && <img src={props.media} alt="#"></img>}
+        {(props.id - 1) % 2 !== 0 && (
+          <Player>
+            <source
+              src={'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'}
+            />
+            <BigPlayButton position="center" />
+          </Player>
+        )}
       </div>
       <hr></hr>
       <div className={classes.actions}>

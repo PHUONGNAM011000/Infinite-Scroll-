@@ -43,7 +43,7 @@
 
 .post .media img {
   width: -webkit-fill-available;
-  height: 500px;
+  height: 400px;
 }
 
 .actions {
@@ -69,3 +69,4 @@
 .seeMore span:hover {
   text-decoration: underline;
 }
+
