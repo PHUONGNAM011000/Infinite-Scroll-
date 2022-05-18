@@ -7,7 +7,6 @@ import { LoremIpsum } from 'lorem-ipsum';
 import { Button } from '@material-ui/core';
 import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
-import { useHistory } from 'react-router-dom';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -31,7 +30,6 @@ function TestTwo() {
   const [count, setCount] = useState(5);
   const [counter, setCounter] = useState(5);
   const alert = useAlert();
-  let history = useHistory();
 
   const fetchPostsHandler = useCallback(async () => {
     let addLiked = [];
@@ -235,13 +233,13 @@ function TestTwo() {
           >
             Thêm bài viết
           </Button>
-          <Button
+          {/* <Button
             color="primary"
             variant="contained"
             onClick={() => history.push('/basic')}
           >
             normal
-          </Button>
+          </Button> */}
         </div>
       </div>
 

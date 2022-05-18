@@ -124,10 +124,16 @@ export default function DialogPost(props) {
     setMedia('');
   };
 
+  let titleDialog = 'Thêm';
+
+  if (props.postDialog.id !== undefined) {
+    titleDialog = 'Sửa';
+  }
+
   return (
     <div>
       <Dialog onClose={handleClose} open={true}>
-        <DialogTitle onClose={handleClose}>Thêm Bài Viết</DialogTitle>
+        <DialogTitle onClose={handleClose}>{titleDialog} Bài Viết</DialogTitle>
         <DialogContent dividers>
           <TextField
             error={errorContent}

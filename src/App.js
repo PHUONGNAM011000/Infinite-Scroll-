@@ -6,12 +6,14 @@ import './App.css';
 const App = () => {
   return (
     <Router>
-      <Route path="/basic">
-        <TestOne />
-      </Route>
-      <Route exact path="/">
-        <TestTwo />
-      </Route>
+      <Switch>
+        <Route path="/basic">
+          <TestOne />
+        </Route>
+        <Route exact path="/">
+          <TestTwo />
+        </Route>
+      </Switch>
     </Router>
   );
 };
