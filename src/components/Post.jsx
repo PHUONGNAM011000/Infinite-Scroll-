@@ -71,7 +71,9 @@ const Post = (props) => {
         {(props.id - 1) % 2 !== 0 && (
           <Player>
             <source
-              src={'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'}
+              src={
+                'https://media.istockphoto.com/videos/view-of-clouds-over-the-mountains-from-above-video-id1316701553'
+              }
             />
             <BigPlayButton position="center" />
           </Player>
