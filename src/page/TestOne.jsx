@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button } from '@material-ui/core';
 import DialogPost from '../components/UI/Dialog/DialogPost';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { LoremIpsum } from 'lorem-ipsum';
 import PostListNormal from '../components/Normal-Test/PostListNormal';
-import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
+import NavBar from '../components/NavBar/NavBar';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -159,39 +158,12 @@ function TestOne() {
         />
       )}
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          boxShadow: 'rgb(44 101 144 / 10%) 0px 0px 8px 0px',
-          backgroundColor: '#8c65bb',
-          padding: '0 16px',
-          position: 'sticky',
-          top: '0',
-          zIndex: 100,
-        }}
-      >
-        <LoadFeed
-          counter={counter}
-          setCounter={setCounter}
-          onClick={counterChangeHandler}
-        />
-        <div>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setAddNewPost(true)}
-          >
-            Thêm bài viết
-          </Button>
-          {/* <Button color="primary" variant="contained">
-            <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
-              Reat Window
-            </Link>
-          </Button> */}
-        </div>
-      </div>
+      <NavBar
+        counter={counter}
+        setCounter={setCounter}
+        counterChangeHandler={counterChangeHandler}
+        setAddNewPost={setAddNewPost}
+      />
 
       {posts.length !== 0 && (
         <InfiniteScroll

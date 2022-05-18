@@ -4,9 +4,8 @@ import DialogPost from '../components/UI/Dialog/DialogPost';
 import Post from '../components/Post';
 import BetterInfiniteScroll from '../components/BetterInfiniteScroll';
 import { LoremIpsum } from 'lorem-ipsum';
-import { Button } from '@material-ui/core';
-import LoadFeed from '../components/UI/LoadFeed/LoadFeed';
 import { useAlert } from 'react-alert';
+import NavBar from '../components/NavBar/NavBar';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -207,41 +206,13 @@ function TestTwo() {
           onAddPost={addPostHandler}
         />
       )}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          boxShadow: 'rgb(44 101 144 / 10%) 0px 0px 8px 0px',
-          backgroundColor: '#8c65bb',
-          padding: '0 16px',
-          position: 'sticky',
-          top: '0',
-        }}
-      >
-        <LoadFeed
-          counter={counter}
-          setCounter={setCounter}
-          onClick={counterChangeHandler}
-        />
-        <div>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => setAddNewPost(true)}
-            style={{ marginRight: '10px' }}
-          >
-            Thêm bài viết
-          </Button>
-          {/* <Button
-            color="primary"
-            variant="contained"
-            onClick={() => history.push('/basic')}
-          >
-            normal
-          </Button> */}
-        </div>
-      </div>
+
+      <NavBar
+        counter={counter}
+        setCounter={setCounter}
+        counterChangeHandler={counterChangeHandler}
+        setAddNewPost={setAddNewPost}
+      />
 
       <BetterInfiniteScroll
         dataLength={posts.length}
@@ -259,7 +230,7 @@ function TestTwo() {
             loading...
           </div>
         }
-        height={window.innerHeight - 72}
+        height={window.innerHeight - 92}
         elementHeight={1150} // 새로 추가
         rowRenderer={rowRenderer}
         children={posts}
