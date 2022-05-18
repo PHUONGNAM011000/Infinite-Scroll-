@@ -6,17 +6,12 @@ import './App.css';
 const App = () => {
   return (
     <>
-      <a href="/basic">Basic</a>
-      <a href="/newfeed">React virtualized</a>
       <Switch>
         <Route exact path="/">
-          <TestOne />
+          <TestTwo />
         </Route>
         <Route exact path="/basic">
           <TestOne />
-        </Route>
-        <Route exact path="/newfeed">
-          <TestTwo />
         </Route>
       </Switch>
     </>
