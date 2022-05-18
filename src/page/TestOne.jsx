@@ -60,7 +60,7 @@ function TestOne() {
     }
 
     setPosts(addLiked);
-  }, [+count]);
+  }, [count]);
 
   useEffect(() => {
     fetchPostsTempHandler();

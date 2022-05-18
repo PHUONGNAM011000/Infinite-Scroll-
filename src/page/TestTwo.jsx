@@ -53,7 +53,7 @@ function TestTwo() {
     }
 
     setPosts(addLiked);
-  }, [+count]);
+  }, [count]);
 
   const fetchPostsTempHandler = useCallback(async () => {
     let addLiked = [];
