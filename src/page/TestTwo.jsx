@@ -230,7 +230,7 @@ function TestTwo() {
             loading...
           </div>
         }
-        height={window.innerHeight - 92}
+        height={window.innerHeight - 72}
         elementHeight={1150} // 새로 추가
         rowRenderer={rowRenderer}
         children={posts}
