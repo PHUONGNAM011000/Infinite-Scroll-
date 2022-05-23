@@ -64,7 +64,7 @@ function TestTwo() {
           title: lorem.generateWords(1),
           isliked: false,
           media: `https://picsum.photos/id/${Math.floor(
-            Math.random() * 1000
+            Math.random() * 20
           )}/200/300`,
         });
       } else
