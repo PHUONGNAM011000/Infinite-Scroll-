@@ -231,7 +231,7 @@ function TestTwo() {
           </div>
         }
         height={window.innerHeight - 72}
-        elementHeight={1150} // 새로 추가
+        elementHeight={1150}
         rowRenderer={rowRenderer}
         children={posts}
         setCount={setCount}

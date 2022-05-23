@@ -14,21 +14,21 @@ const ListComment = (props) => {
       <Comment
         comment={{
           media: 'https://picsum.photos/id/10/200/300',
-          name: 'Tam',
+          name: 'User1',
           body: 'Do excepteur in laboris. Dolore tempor anim esse amet. ',
         }}
       />
       <Comment
         comment={{
           media: 'https://picsum.photos/id/20/200/300',
-          name: 'Nam',
+          name: 'User2',
           body: 'Ea enim tempor proident aliquip consectetur labore et amet reprehenderit sit elit. ',
         }}
       />
       <Comment
         comment={{
           media: 'https://picsum.photos/id/30/200/300',
-          name: 'Linh',
+          name: 'User3',
           body: 'Cillum reprehenderit qui do nisi tempor amet aliquip occaecat voluptate mollit labore dolor enim sint aliqua.',
         }}
       />
